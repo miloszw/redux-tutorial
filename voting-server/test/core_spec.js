@@ -1,7 +1,7 @@
-import {List, Map} from 'immutable';
+import {List, Map, fromJS} from 'immutable';
 import {expect} from 'chai';
 
-import {next, setEntries} from '../src/core';
+import {vote, next, setEntries} from '../src/core';
 
 describe('application logic', () => {
 
@@ -34,14 +34,22 @@ describe('application logic', () => {
         entries: List.of('Trainspotting', '28 Days Later', 'Sunshine')
       });
       const nextState = next(state);
-      expect(nextState).to.equal(Map({
-        vote: Map({
-          pair: List.of('Trainspotting', '28 Days Later')
-        }),
-        entries: List.of('Sunshine')
+      expect(nextState).to.equal(fromJS({
+        vote: { pair: ['Trainspotting', '28 Days Later'] },
+        entries: ['Sunshine']
       }));
+
     });
 
-  })
+  });
+
+  describe('vote', () => {
+
+    // it('creates a tally for the voted entry', () => {
+    //   const state = Map()
+    // })
+
+
+  });
 
 });
